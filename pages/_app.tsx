@@ -15,7 +15,7 @@ const theme = extendTheme({
         },
     },
     components: {
-        Buton: {
+        Button: {
             variants: {
                 link: {
                     ':focus': {
