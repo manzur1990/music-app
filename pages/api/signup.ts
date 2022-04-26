@@ -4,4 +4,42 @@ import cookie from 'cookie'
 import prisma from '../../lib/prisma'
 import { NextApiRequest, NextApiResponse } from 'next'
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {}
+export default async (req: NextApiRequest, res: NextApiResponse) => {
+  const salt = brycrypt.genSaltSync()
+  const { email, password } = req.body
+
+  let user
+
+  try {
+    user = await prisma.user.create({
+      data: {
+        email,
+        password: brycrypt.hashSync(password, salt),
+      },
+    })
+  } catch (e) {
+    res.status(401)
+    res.json({ error: 'user already exists ' })
+    return
+  }
+  const token = jwt.sign(
+    {
+      email: user.email,
+      id: user.id,
+      time: Date.now(),
+    },
+    'hello',
+    { expiresIn: '8h ' }
+  )
+  res.setHeader(
+    'Set-Cookie',
+    cookie.serealize('Disco_Access_Token', token, {
+      httpOnly: true,
+      maxAge: 8 * 60 * 60,
+      path: '/',
+      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production',
+    })
+  )
+  res.json({ user })
+}
