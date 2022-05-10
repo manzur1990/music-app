@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import GradientLayout from '../components/gradientLayout'
+import prisma from '../lib/prisma'
 import styles from '../styles/Home.module.css'
 
-export default function Home() {
+const Home = ({ artists }) => {
   return (
     <GradientLayout
       color="pink"
@@ -18,3 +19,13 @@ export default function Home() {
     </GradientLayout>
   )
 }
+
+export const getServerSideProps = async () => {
+  const artists = await prisma.artist.findMany({})
+  console.log(artists)
+  return {
+    props: { artists },
+  }
+}
+
+export default Home
