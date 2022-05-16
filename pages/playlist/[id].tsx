@@ -18,8 +18,15 @@ const getRGBColor = (id) => {
 const Playlist = ({ playlist }) => {
   const color = getRGBColor(playlist.id)
   return (
-    <GradientLayout color={color}>
-      <div>dfd</div>
+    <GradientLayout
+      color={color}
+      roundImage={false}
+      title={playlist.name}
+      subtitle="playlist"
+      description={`${playlist.songs.length} songs`}
+      image={`https://picsum.photos/400?random=${playlist.id}`}
+    >
+      <div>{playlist.name}</div>
     </GradientLayout>
   )
 }
