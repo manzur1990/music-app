@@ -28,7 +28,7 @@ export const validateRoute = (handler) => {
     }
 
     res.status(401)
-    res.json({ error: 'Not Authorizied' })
+    res.json({ error: 'Not Authorized' })
   }
 }
 
