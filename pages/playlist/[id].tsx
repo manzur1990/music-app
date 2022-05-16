@@ -5,7 +5,7 @@ import prisma from '../../lib/prisma'
 const getRGBColor = (id) => {
   const colors = [
     'red',
-    'greed',
+    'green',
     'blue',
     'orange',
     'purple',
