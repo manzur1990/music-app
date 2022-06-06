@@ -74,6 +74,13 @@ const Player = () => {
           />
         </ButtonGroup>
       </Center>
+      <Box color="gray.600">
+        <Flex justify="center" align="center">
+          <Box width="10%">
+            <Text fontSize="xs">1:12</Text>
+          </Box>
+        </Flex>
+      </Box>
     </Box>
   )
 }
