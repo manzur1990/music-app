@@ -30,11 +30,13 @@ const Player = ({ songs, activeSong }) => {
   const [shuffle, setShuffle] = useState(false)
   const [duration, setDuration] = useState(0.0)
 
+  const setPlayState = (value) => {
+    setPlaying(value)
+  }
+
   return (
     <Box>
-      <Box>
-        <ReactHowler playing={playing} src={activeSong?.url} />
-      </Box>
+      <Box>{/* <ReactHowler playing={playing} src={activeSong?.url} /> */}</Box>
       <Center color="gray.600">
         <ButtonGroup>
           <IconButton
@@ -51,22 +53,27 @@ const Player = ({ songs, activeSong }) => {
             fontSize="24px"
             icon={<MdSkipPrevious />}
           />
-          <IconButton
-            outline="none"
-            variant="link"
-            aria-label="play"
-            fontSize="50px"
-            color="white"
-            icon={<MdOutlinePlayCircleFilled />}
-          />
-          <IconButton
-            outline="none"
-            variant="link"
-            aria-label="pause"
-            fontSize="50px"
-            color="white"
-            icon={<MdOutlinePauseCircleFilled />}
-          />
+          {playing ? (
+            <IconButton
+              outline="none"
+              variant="link"
+              aria-label="pause"
+              fontSize="50px"
+              color="white"
+              icon={<MdOutlinePauseCircleFilled />}
+              onClick={() => setPlayState(false)}
+            />
+          ) : (
+            <IconButton
+              outline="none"
+              variant="link"
+              aria-label="play"
+              fontSize="50px"
+              color="white"
+              icon={<MdOutlinePlayCircleFilled />}
+              onClick={() => setPlayState(true)}
+            />
+          )}
           <IconButton
             outline="none"
             variant="link"
