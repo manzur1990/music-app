@@ -34,6 +34,14 @@ const Player = ({ songs, activeSong }) => {
     setPlaying(value)
   }
 
+  const onShuffle = () => {
+    setShuffle((state) => !state)
+  }
+
+  const onRpeat = () => {
+    setRepeat((state) => !state)
+  }
+
   return (
     <Box>
       <Box>{/* <ReactHowler playing={playing} src={activeSong?.url} /> */}</Box>
@@ -45,6 +53,8 @@ const Player = ({ songs, activeSong }) => {
             aria-label="shuffle"
             fontSize="24px"
             icon={<MdShuffle />}
+            color={shuffle ? 'white' : 'gray.600'}
+            onClick={onShuffle}
           />
           <IconButton
             outline="none"
@@ -87,6 +97,8 @@ const Player = ({ songs, activeSong }) => {
             aria-label="repeat"
             fontSize="24px"
             icon={<MdOutlineRepeat />}
+            color={repeat ? 'white' : 'gray.600'}
+            onClick={onRpeat}
           />
         </ButtonGroup>
       </Center>
